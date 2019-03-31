@@ -1,0 +1,30 @@
+/**
+ * @Auther: user
+ * @Date: 2019/3/31 15:27
+ * @Description:
+ */
+public class CurrentConditionsDisplay implements Observer, DisplayElement {
+
+    private float temperature;
+
+    private float humidity;
+
+    private Subject weatherData;
+
+    public CurrentConditionsDisplay(Subject weatherData) {
+        this.weatherData = weatherData;
+        weatherData.registerObserver(this);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Current conditions: " + this.temperature + "F degrees and " + humidity + "% humidity");
+    }
+
+    @Override
+    public void update(float temp, float humidity, float pressure) {
+        this.temperature = temp;
+        this.humidity = humidity;
+        display();
+    }
+}
